@@ -4,12 +4,24 @@ namespace LineSegmentApp
 {
   class Point
   {
-    private double x = 0;
-    private double y = 0;
+    private double _x;
+    public double x {
+      get
+      {
+        return _x;
+      }
+    }
+    private double _y;
+    public double y {
+      get
+      {
+        return _y;
+      }
+    }
     private Point(double x, double y)
     {
-      this.x = x;
-      this.y = y;
+      _x = x;
+      _y = y;
     }
 
     public static Point create(double x, double y)
@@ -19,8 +31,8 @@ namespace LineSegmentApp
 
     public void setPoint(double x, double y)
     {
-      this.x = x;
-      this.y = y;
+      _x = x;
+      _y = y;
     }
 
     public double dist(Point p)  // compute the distance of point p to the current point
