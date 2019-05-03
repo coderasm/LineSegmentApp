@@ -85,7 +85,7 @@ namespace LineSegmentApp
     {
       var isLeft = false;
       var slope = Slope();
-      if (slope != null && (double)slope != 0)
+      if (slope == null)
         isLeft = p.x < (p.y - (double)yIntercept()) / (double)slope;
       return isLeft;
     }
@@ -94,9 +94,33 @@ namespace LineSegmentApp
     {
       var isRight = false;
       var slope = Slope();
-      if (slope != null && (double)slope != 0)
+      if (slope == null)
         isRight = p.x > (p.y - (double)yIntercept()) / (double)slope;
       return isRight;
+    }
+
+    public bool Parallel(LineSegment line)
+    {
+      var slopeLine = Slope();
+      var slopeTwo = line.Slope();
+      var isParallel = false;
+      if (slopeLine != null && slopeTwo != null)
+        isParallel = (double)slopeTwo == (double)slopeLine;
+      if (slopeLine == slopeTwo)
+        isParallel = true;
+      return isParallel;
+    }
+
+    public bool MeetInMiddle(LineSegment line)
+    {
+
+    }
+
+    private Point Midpoint()
+    {
+      var dist = pointOne.dist(pointTwo);
+      var mid = dist / 2;
+      var x = 
     }
   }
 }
