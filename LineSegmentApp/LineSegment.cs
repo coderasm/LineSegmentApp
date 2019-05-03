@@ -136,7 +136,7 @@ namespace LineSegmentApp
 
     public bool DoNotMeet(LineSegment line)
     {
-
+      return Parallel(line);
     }
   }
 }
