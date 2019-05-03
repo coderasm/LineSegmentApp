@@ -98,5 +98,29 @@ namespace LineSegmentApp
         isRight = p.x > pointOne.x;
       return isRight;
     }
+
+    public bool Parallel(LineSegment line)
+    {
+      var slopeLine = Slope();
+      var slopeTwo = line.Slope();
+      var isParallel = false;
+      if (slopeLine != null && slopeTwo != null)
+        isParallel = (double)slopeTwo == (double)slopeLine;
+      if (slopeLine == slopeTwo)
+        isParallel = true;
+      return isParallel;
+    }
+
+    public bool MeetInMiddle(LineSegment line)
+    {
+
+    }
+
+    private Point Midpoint()
+    {
+      var dist = pointOne.dist(pointTwo);
+      var mid = dist / 2;
+      var x = 
+    }
   }
 }
