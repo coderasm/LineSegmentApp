@@ -113,14 +113,30 @@ namespace LineSegmentApp
 
     public bool MeetInMiddle(LineSegment line)
     {
-
+      return Midpoint().Equals(line.Midpoint());
     }
 
     private Point Midpoint()
     {
-      var dist = pointOne.dist(pointTwo);
-      var mid = dist / 2;
-      var x = 
+      var mag = pointOne.dist(pointTwo);
+      var mid = mag / 2;
+      var angle = Angle();
+      var x = Math.Cos(angle) * mid;
+      var y = Math.Sin(angle) * mid;
+      return Point.create(x, y);
+    }
+
+    public bool MeetAtTheEnd(LineSegment line)
+    {
+      return pointOne.x == line.pointOne.x && pointOne.y == line.pointOne.y ||
+             pointOne.x == line.pointTwo.x && pointOne.y == line.pointTwo.y ||
+             pointTwo.x == line.pointOne.x && pointTwo.y == line.pointOne.y ||
+             pointTwo.x == line.pointTwo.x && pointTwo.y == line.pointTwo.y;
+    }
+
+    public bool DoNotMeet(LineSegment line)
+    {
+
     }
   }
 }

@@ -67,5 +67,10 @@ namespace LineSegmentApp
     {
       return $"({x}, {y})";
     }
+
+    public bool Equals(Point p)
+    {
+      return x == p.x && y == p.y;
+    }
   }
 }
