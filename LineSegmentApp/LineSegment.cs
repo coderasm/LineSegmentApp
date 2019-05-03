@@ -85,8 +85,8 @@ namespace LineSegmentApp
     {
       var isLeft = false;
       var slope = Slope();
-      if (slope != null && (double)slope != 0)
-        isLeft = p.x < (p.y - (double)yIntercept()) / (double)slope;
+      if (slope == null )
+        isLeft = p.x < pointOne.x;
       return isLeft;
     }
 
@@ -94,8 +94,8 @@ namespace LineSegmentApp
     {
       var isRight = false;
       var slope = Slope();
-      if (slope != null && (double)slope != 0)
-        isRight = p.x > (p.y - (double)yIntercept()) / (double)slope;
+      if (slope == null)
+        isRight = p.x > pointOne.x;
       return isRight;
     }
   }
