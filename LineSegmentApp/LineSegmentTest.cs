@@ -151,7 +151,7 @@ namespace LineSegmentApp
     }
 
     //MeetAtEnd test
-    public static void MeetAtEnd()
+    public static void MeetAtEndTest()
     {
       var segment = LineSegment.Create(Point.create(0, 0), Point.create(4, 4));
       var segment1 = LineSegment.Create(Point.create(0, 0), Point.create(-2, 2));

@@ -18,7 +18,7 @@ namespace LineSegmentApp
       LineSegmentTest.OnLeftTest();
       LineSegmentTest.ParallelTest();
       LineSegmentTest.MeetInMiddleTest();
-      LineSegmentTest.MeetAtEnd();
+      LineSegmentTest.MeetAtEndTest();
       LineSegmentTest.DoesNotMeetTest();
       Console.ReadKey();
     }
