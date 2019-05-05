@@ -118,25 +118,83 @@ namespace LineSegmentApp
 
     private Point Midpoint()
     {
-      var mag = pointOne.dist(pointTwo);
-      var mid = mag / 2;
-      var angle = Angle();
-      var x = Math.Cos(angle) * mid;
-      var y = Math.Sin(angle) * mid;
-      return Point.create(x, y);
+      var xMid = (pointOne.x + pointTwo.x) / 2;
+      var yMid = (pointOne.y + pointTwo.y) / 2;
+      return Point.create(xMid, yMid);
     }
 
     public bool MeetAtTheEnd(LineSegment line)
     {
-      return pointOne.x == line.pointOne.x && pointOne.y == line.pointOne.y ||
-             pointOne.x == line.pointTwo.x && pointOne.y == line.pointTwo.y ||
-             pointTwo.x == line.pointOne.x && pointTwo.y == line.pointOne.y ||
-             pointTwo.x == line.pointTwo.x && pointTwo.y == line.pointTwo.y;
+      return IntersectsAtPoint(line);
     }
 
     public bool DoNotMeet(LineSegment line)
     {
-      return Parallel(line);
+      var isParallel = Parallel(line);
+      var intersects = IntersectFully(line) || IntersectsAtPoint(line);
+      return !intersects ||
+             (isParallel && yIntercept() != line.yIntercept()) ||
+             (isParallel && xIntercept() != line.xIntercept());
+    }
+
+    private int[] Orientations(LineSegment line)
+    {
+      //orientations for general and special cases 
+      int o1 = Orientation(pointOne, pointTwo, line.pointOne);
+      int o2 = Orientation(pointOne, pointTwo, line.pointTwo);
+      int o3 = Orientation(pointTwo, line.pointTwo, pointOne);
+      int o4 = Orientation(pointTwo, line.pointTwo, pointTwo);
+      return new int[] { o1, o2, o3, o4 };
+    }
+
+    private bool IntersectFully(LineSegment line)
+    {
+      var orientations = Orientations(line);
+      return orientations[0] != orientations[1] && orientations[2] != orientations[3];
+    }
+
+    private bool IntersectsAtPoint(LineSegment line)
+    {
+      var orientations = Orientations(line);
+      // Special Cases for colinearity of endpoints
+      // pointOne, line.pointTwo and line.pointOne are colinear and line.pointOne lies on segment pointOneline.pointTwo 
+      if (orientations[0] == 0 && OnLine(pointOne, line.pointOne, pointTwo))
+        return true;
+      // pointOne, line.pointTwo and line.pointTwo are colinear and line.pointTwo lies on segment pointOneline.pointTwo 
+      if (orientations[1] == 0 && OnLine(pointOne, line.pointTwo, pointTwo))
+        return true;
+      // line.pointOne, line.pointTwo and pointOne are colinear and pointOne lies on segment line.pointOneline.pointTwo 
+      if (orientations[2] == 0 && OnLine(line.pointOne, pointOne, line.pointTwo))
+        return true;
+      // line.pointOne, line.pointTwo and line.pointTwo are colinear and line.pointTwo lies on segment line.pointOneline.pointTwo 
+      if (orientations[3] == 0 && OnLine(line.pointOne, pointTwo, line.pointTwo))
+        return true;
+      //No intersection
+      return false;
+    }
+
+    //check if point lies on segment
+    private bool OnLine(Point p, Point q, Point r)
+    {
+      if (q.x <= Math.Max(p.x, r.x) && q.x >= Math.Min(p.x, r.x) &&
+          q.y <= Math.Max(p.y, r.y) && q.y >= Math.Min(p.y, r.y))
+        return true;
+      return false;
+    }
+
+    private int Orientation(Point p, Point q, Point r)
+    {
+      double val = (q.y - p.y) * (r.x - q.x) -
+                (q.x - p.x) * (r.y - q.y);
+      //colinear if zero
+      if (val == 0) return 0;
+      // clock or counterclock wise 
+      return (val > 0) ? 1 : 2;
+    }
+
+    public string ToString()
+    {
+      return $"{pointOne.ToString()}, {pointTwo.ToString()}";
     }
   }
 }

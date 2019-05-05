@@ -10,9 +10,16 @@ namespace LineSegmentApp
   {
     static void Main(string[] args)
     {
-      //Angle Test
-      var segment = LineSegment.Create(Point.create(1, -1), Point.create(4, -4));
-      Console.WriteLine(segment.Angle() * 180 / Math.PI);
+      LineSegmentTest.LengthTest();
+      LineSegmentTest.AngleTest();
+      LineSegmentTest.AboveLineTest();
+      LineSegmentTest.BelowLineTest();
+      LineSegmentTest.OnRightTest();
+      LineSegmentTest.OnLeftTest();
+      LineSegmentTest.ParallelTest();
+      LineSegmentTest.MeetInMiddleTest();
+      LineSegmentTest.MeetAtEnd();
+      LineSegmentTest.DoesNotMeetTest();
       Console.ReadKey();
     }
   }

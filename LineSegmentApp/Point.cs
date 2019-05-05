@@ -63,7 +63,7 @@ namespace LineSegmentApp
       return dist(create(0, 0));
     }
 
-    public string print()
+    public string ToString()
     {
       return $"({x}, {y})";
     }
