@@ -147,6 +147,17 @@ namespace LineSegmentApp
       return new int[] { o1, o2, o3, o4 };
     }
 
+    //Orientation comes from slope subtractions
+    private int Orientation(Point p, Point q, Point r)
+    {
+      double val = (q.y - p.y) * (r.x - q.x) -
+                (q.x - p.x) * (r.y - q.y);
+      //colinear if zero
+      if (val == 0) return 0;
+      // clock or counterclock wise 
+      return (val > 0) ? 1 : 2;
+    }
+
     private bool IntersectFully(LineSegment line)
     {
       var orientations = Orientations(line);
@@ -180,16 +191,6 @@ namespace LineSegmentApp
           q.y <= Math.Max(p.y, r.y) && q.y >= Math.Min(p.y, r.y))
         return true;
       return false;
-    }
-
-    private int Orientation(Point p, Point q, Point r)
-    {
-      double val = (q.y - p.y) * (r.x - q.x) -
-                (q.x - p.x) * (r.y - q.y);
-      //colinear if zero
-      if (val == 0) return 0;
-      // clock or counterclock wise 
-      return (val > 0) ? 1 : 2;
     }
 
     public string ToString()
