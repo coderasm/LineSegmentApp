@@ -1,0 +1,46 @@
+LineSegment:
+Length)
+Compute length of line segement using distance formula for
+distance between end points.
+
+Angle)
+Compute angle by subtracting points. Then normalize resulting vector.
+cosine theta is then x component of vector divided by normalized
+magnitude. If y component is negative then subtract theta from 2pi.
+
+AboveLine)
+Plug x of point into point-slope formula of segment.
+If y is greater than calculated y then point is above segment, else
+point is on or below segment.
+
+BelowLine)
+Plug x of point into point-slope formula of segment.
+If y is less than calculated y then point is below segment, else
+point is on or above segment.
+
+OnLeft)
+If x coordinate of point is left of leftmost endpoint, then the point
+is left of the segment.
+
+OnRight)
+If x coordinate of point is right of rightmost endpoint, then the point
+is right of the segment.
+
+Parallel)
+If slopes are equal then the segments are parallel
+
+MeetInMiddle)
+If middpoints of each segment are the same point, then the segments meet
+in the middle
+
+MeetAtEnd)
+Two segments meet at the end if the endpoint of one segment lies on the other
+segment. Determine orientation of segements relative to each other using segment
+slopes. If three endpoints are colinear, then check if endpoint of one segment
+lies on other segment. If three points are colinear and an endpoint of one segment
+lies on the other segment, then the segments meet at the end.
+
+DoNotMeet)
+If segments are parallel they do not intersect. Incompatible segment orientations or the
+endpoint of one segment not lying on the other segment means the segments do not
+intersect.
